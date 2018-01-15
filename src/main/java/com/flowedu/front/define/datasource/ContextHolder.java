@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public class ContextHolder {
 	private static final ThreadLocal<DataSourceType> contextHolder = new ThreadLocal<DataSourceType>();

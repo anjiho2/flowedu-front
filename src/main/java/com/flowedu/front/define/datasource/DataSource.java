@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 /**
  * 기념일 알림 타입 정의(타입코드, 라벨, 서브내용, 날짜)

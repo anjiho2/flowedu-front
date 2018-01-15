@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum ItemType {
 	COLLECTION(0,"컬렉션"), 

@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum CornEnum {
 	CORN_1(10, 1100),

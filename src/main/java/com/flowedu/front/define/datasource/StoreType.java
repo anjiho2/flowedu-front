@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum StoreType {
 	clt(0, "컬렉션"), 

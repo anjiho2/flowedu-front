@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 enum CollectionItemName implements CollectionType{
 	전체(0), 콜렉션(1), 새(2), 모자(3), 안경(4), 코스튬(5),

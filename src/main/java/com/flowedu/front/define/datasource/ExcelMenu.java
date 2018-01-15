@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum ExcelMenu {
 	PHONE_NUMBER("전화번호"), USER_NAME("이 름"), ITEM_NAME("아이템 이름"), ITEM_CODE("아이템 코드"), 

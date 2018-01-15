@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum Bsm implements BsmType {
 	웃음(0), 인사(1), 사랑(2), 슬픔(3), 분노(4), 충격(5);

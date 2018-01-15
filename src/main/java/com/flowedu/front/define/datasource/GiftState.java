@@ -1,4 +1,4 @@
-package com.angular.test.define.datasource;
+package com.flowedu.front.define.datasource;
 
 public enum GiftState {
 	PRE_RECEIVE(0),	//수령전 
