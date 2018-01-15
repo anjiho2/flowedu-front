@@ -21,7 +21,7 @@
     
     <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
     
-    <context:component-scan base-package="com.angular.test">
+    <context:component-scan base-package="com.flowedu.front">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
         <context:exclude-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
@@ -56,9 +56,9 @@
                 <!--p:password="#{config['version.db.password']}"-->
                 <!--p:url="#{config['version.db.url']}"/>-->
                 <!---->
-	<!--<bean id="routingDataSource" class="com.angular.test.define.datasource.RoutingDataSource">-->
+	<!--<bean id="routingDataSource" class="RoutingDataSource">-->
 		<!--<property name="targetDataSources">-->
-			<!--<map key-type="com.angular.test.define.datasource.DataSourceType">-->
+			<!--<map key-type="DataSourceType">-->
 				<!--<entry key="ADMIN" value-ref="adminDataSource"/>-->
 				<!--<entry key="PUSH" value-ref="pushDataSource"/>-->
 				<!--<entry key="VERSION" value-ref="versionDataSource"/>-->
@@ -73,7 +73,7 @@
     <!--</bean>-->
     
     <!-- ========================= AOP DEFINITIONS ======================== -->
-    <!--<bean id="datasourceAspect" class="com.angular.test.aop.ExecutionDatasourceAspect"/>-->
+    <!--<bean id="datasourceAspect" class="ExecutionDatasourceAspect"/>-->
     <!--<aop:aspectj-autoproxy>-->
     	<!--<aop:include name="datasourceAspect"/>-->
     <!--</aop:aspectj-autoproxy>-->

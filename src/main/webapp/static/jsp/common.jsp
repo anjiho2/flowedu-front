@@ -3,9 +3,9 @@
 <%
     String webRoot = request.getContextPath();
 %>
-<html ng-app="AngularSpringApp">
+<html ng-app="FloweudFrontApp">
 <head>
-    <title>Hello AngularJS</title>
+    <title>플로우 교육</title>
     <%--<meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
     <meta charset="utf-8">
 
@@ -31,7 +31,7 @@
 <body>
 <div class='tab'>
     <div class="activeTeamsDropdownStyle">
-        <b>Spring MVC Server Side Pagination ng-grid AngularJS</b>
+        <%--<b>Spring MVC Server Side Pagination ng-grid AngularJS</b>--%>
     </div>
     <li><a href="<%=webRoot%>/login">로그인</a></li>
     <li><a href="<%=webRoot%>/userList">사용자 목록</a></li>
