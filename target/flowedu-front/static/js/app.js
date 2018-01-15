@@ -1,9 +1,9 @@
 'use strict'
-var AngularSpringApp = {};
+var FloweudFrontApp = {};
 
-var App = angular.module('AngularSpringApp', ['AngularSpringApp.filters', 'AngularSpringApp.service', 'AngularSpringApp.directives', 'ngRoute', 'ngTable', 'ui.ace']);
+var App = angular.module('FloweudFrontApp', ['FloweudFrontApp.filters', 'FloweudFrontApp.service', 'FloweudFrontApp.directives', 'ngRoute', 'ngTable', 'ui.ace']);
 
-App.config(['$routeProvider', function ($routeProvider) {
+App.config(['$routeProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider.when("/login", {
         templateUrl : 'login/layout',
@@ -48,4 +48,6 @@ App.config(['$routeProvider', function ($routeProvider) {
     });
 
     $routeProvider.otherwise({redirectTo : '/'});
+
+    $locationProvider.html5Mode(true); //activate HTML5 Mode
 }]);

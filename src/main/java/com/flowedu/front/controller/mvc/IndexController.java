@@ -22,7 +22,7 @@ public class IndexController {
         return mvc;
     }
 
-    @RequestMapping(value = {"/todo/layout"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/todo"}, method = RequestMethod.GET)
     public ModelAndView getManagementPage() {
         ModelAndView mvc = new ModelAndView();
         mvc.setViewName("/todo/layout");

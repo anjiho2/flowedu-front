@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <activeProfiles>
+        <activeProfile>ibm-dev</activeProfile>
+    </activeProfiles>
+
+    <servers>
+        <server>
+            <id>Dev_TomcatServer</id>
+            <username>tomcat_flowedu</username>
+            <password>flowedu3400</password>
+        </server>
+        <server>
+            <id>flowedu.internal.release</id>
+            <username>flowedu</username>
+            <password>flowedu3400</password>
+        </server>
+        <server>
+            <id>flowedu.internal.snapshot</id>
+            <username>flowedu</username>
+            <password>flowedu3400</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror>
+            <id>nexus</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://211.111.239.32:8081/nexus/content/groups/public</url>
+        </mirror>
+    </mirrors>
+
+
+    <localRepository>
+        nexus
+    </localRepository>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <flowedu.api.url>http://192.168.0.128:8888/flowedu-api</flowedu.api.url>
+                <session.use.yn>false</session.use.yn>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev-outport</id>
+            <properties>
+                <flowedu.api.url>http://211.111.239.32:8888/flowedu-api</flowedu.api.url>
+                <session.use.yn>false</session.use.yn>
+            </properties>
+        </profile>
+        <profile>
+            <id>ibm-dev</id>
+            <properties>
+                <flowedu.api.url>http://169.56.71.251:8888/flowedu-api/</flowedu.api.url>
+                <session.use.yn>ture</session.use.yn>
+            </properties>
+        </profile>
+    </profiles>
+
+</settings>

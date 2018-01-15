@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/static/jsp/common.jsp" %>
 HELLO, {{user_id}}님 환영합니다.
 <div class="alert alert-error" ng-show="error">{{errorMessage}}</div>
 <div class="row">

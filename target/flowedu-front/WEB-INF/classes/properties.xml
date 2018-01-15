@@ -11,34 +11,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>properties</comment>
-    <entry key="admin.db.url">jdbc:mysql://127.0.0.1:3306/birdletter_db</entry>
-    <entry key="admin.db.username">root</entry>
-    <entry key="admin.db.password">c7684301</entry>
-    
-    <entry key="push.db.url">jdbc:mysql://52.78.2.44:3306/birdletter_push</entry>
-    <entry key="push.db.username">birdman_user</entry>
-    <entry key="push.db.password">qmfhtmqjemaos</entry>
-    
-    <entry key="version.db.url">jdbc:mysql://52.78.26.168:3306/birdletter_version</entry>
-    <entry key="version.db.username">birdman_user</entry>
-    <entry key="version.db.password">qmfhtmqjemaos</entry>
-    
-    <entry key="logger.root">/Users/jihoan/Downloads/</entry>
-    <entry key="logger.level">DEBUG</entry>
-    <entry key="logger.name">STDOUT</entry>
-    
-    <entry key="service.isQuartzUseCheck">false</entry>
-    
-    <entry key="google.email.username">anjo0080</entry>
-    <entry key="google.email.password">c7684301-++</entry>
-    
-    <entry key="service.isUseEmail">false</entry>
-    
-    <entry key="service.version">1.2.2</entry>
-    
-    <!-- 
-    <entry key="db.url">jdbc:mysql://192.168.0.30:3306/birdletter_db_v102</entry>
-    <entry key="db.password">qmfhtmqjemaos</entry>
-    <entry key="db.username">root</entry>
-     -->
+    <entry key="flowedu.api.url">http://169.56.71.251:8888/flowedu-api/</entry>
+
+    <entry key="session.use.yn">ture</entry>
 </properties>
