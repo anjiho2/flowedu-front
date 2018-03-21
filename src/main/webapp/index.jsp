@@ -1,101 +1,119 @@
-<%@ include file="static/jsp/common.jsp" %>
-<%--<html ng-app="AngularSpringApp">--%>
-<%--<head>--%>
-    <%--<title>Hello AngularJS</title>--%>
-    <%--&lt;%&ndash;<meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;%&gt;--%>
-    <%--<meta charset="utf-8">--%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>AngularJS $http Example</title>
+    <style>
+        .username.ng-valid {
+            background-color: lightgreen;
+        }
+        .username.ng-dirty.ng-invalid-required {
+            background-color: red;
+        }
+        .username.ng-dirty.ng-invalid-minlength {
+            background-color: yellow;
+        }
 
-    <%--<base href="/">--%>
+        .email.ng-valid {
+            background-color: lightgreen;
+        }
+        .email.ng-dirty.ng-invalid-required {
+            background-color: red;
+        }
+        .email.ng-dirty.ng-invalid-email {
+            background-color: yellow;
+        }
 
-    <%--<link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet">--%>
-    <%--<link href="resources/bootstrap/css/prettify.css" rel="stylesheet">--%>
-
-    <%--<link rel="stylesheet" href="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.css">--%>
-
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">--%>
-
-    <%--<!-- Loading Flat UI -->--%>
-    <%--<link href="resources/css/flat-ui.css" rel="stylesheet">--%>
-    <%--<link href="resources/css/docs.css" rel="stylesheet">--%>
-
-    <%--<link href="resources/css/nv.d3.min.css" rel="stylesheet">--%>
-
-    <%--<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>--%>
-<%--</head>--%>
-
-<%--<body>--%>
-<%--<div class='tab'>--%>
-    <%--<div class="activeTeamsDropdownStyle">--%>
-        <%--<b>Spring MVC Server Side Pagination ng-grid AngularJS</b>--%>
-    <%--</div>--%>
-    <%--<li><a href="<%=webRoot%>/login">로그인</a></li>--%>
-    <%--<li><a href="<%=webRoot%>/userList">사용자 목록</a></li>--%>
-    <%--<li><a href="<%=webRoot%>/product">스토 목록</a></li>--%>
-    <%--<li><a href="<%=webRoot%>/todo">Todo List</a></li>--%>
-    <%--<li><a href="/address">Address Book</a></li>--%>
-    <%--<li><a href="/table">Dynamic Table</a></li>--%>
-    <%--<li><a href="/tabs">Dynamic Tabs</a></li>--%>
-    <%--<li><a href="/file">File Upload</a></li>--%>
-    <%--<li><a href="/editor">Ace Editor</a></li>--%>
-    <%--<li><a href="/restangular">Restangular</a></li>--%>
-    <%--<li><a href="/d3">D3 Chart</a></li>--%>
-    <%--<li><a href="/force">Force.com</a></li>--%>
-    <%--<div class="filler"></div>--%>
-    <%--<div class="gridModelStyle" data-ng-grid="gridOptions"></div>--%>
-
-    <%--<div ng-view></div>--%>
-<%--</div>--%>
-
-<%--<script src="resources/js/common/common.js"></script>--%>
-
-<%--<script src="resources/js/jquery-1.8.3.min.js"></script>--%>
-<%--<script src="resources/js/jquery-ui-1.10.3.custom.min.js"></script>--%>
-<%--<script src="resources/js/jquery.ui.touch-punch.min.js"></script>--%>
-<%--<script src="resources/js/bootstrap.min.js"></script>--%>
-<%--<script src="resources/js/bootstrap-select.js"></script>--%>
-<%--<script src="resources/js/bootstrap-switch.js"></script>--%>
-<%--<script src="resources/js/flatui-checkbox.js"></script>--%>
-<%--<script src="resources/js/flatui-radio.js"></script>--%>
-<%--<script src="resources/js/jquery.tagsinput.js"></script>--%>
-<%--<script src="resources/js/jquery.placeholder.js"></script>--%>
-<%--<script src="resources/js/typeahead.js"></script>--%>
-<%--<script src="resources/bootstrap/js/google-code-prettify/prettify.js"></script>--%>
-<%--<script src="resources/js/application.js"></script>--%>
-<%--<script src="resources/js/lib/angular/angular-file-upload-shim.min.js"></script>--%>
-
-<%--&lt;%&ndash;<script src="resources/js/lib/angular/angular.min.js"></script>&ndash;%&gt;--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js"></script>--%>
-
-<%--&lt;%&ndash;<script src="https://cdn.jsdelivr.net/angular.ngtable/1.0.0/ng-table.min.js.map"></script>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.js"></script>&ndash;%&gt;--%>
-<%--<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>--%>
-
-<%--<script src="resources/js/lib/angular/ui-bootstrap-tpls-0.11.0.min.js"></script>--%>
-<%--<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>--%>
-<%--<script src="resources/js/lib/angular/ui-ace.min.js"></script>--%>
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+</head>
+<body ng-app="myApp" class="ng-cloak">
+<div class="generic-container" ng-controller="UserController as ctrl">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">User Registration Form </span></div>
+        <div class="formcontainer">
+            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl.user.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="file">Name</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.user.username" name="uname" class="username form-control input-sm" placeholder="Enter your name" required ng-minlength="3"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.uname.$error.required">This is a required field</span>
+                                <span ng-show="myForm.uname.$error.minlength">Minimum length required is 3</span>
+                                <span ng-show="myForm.uname.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-<%--<script src="resources/js/lib/angular/restangular.min.js"></script>--%>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="file">Address</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.user.address" class="form-control input-sm" placeholder="Enter your Address. [This field is validation free]"/>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="file">Email</label>
+                        <div class="col-md-7">
+                            <input type="email" ng-model="ctrl.user.email" name="email" class="email form-control input-sm" placeholder="Enter your Email" required/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.email.$error.required">This is a required field</span>
+                                <span ng-show="myForm.email.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<%--<script src="resources/js/services.js"></script>--%>
-<%--<script src="resources/js/filters.js"></script>--%>
-<%--<script src="resources/js/directives.js"></script>--%>
+                <div class="row">
+                    <div class="form-actions floatRight">
+                        <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Users </span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID.</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th width="20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="u in ctrl.users">
+                    <td><span ng-bind="u.id"></span></td>
+                    <td><span ng-bind="u.username"></span></td>
+                    <td><span ng-bind="u.address"></span></td>
+                    <td><span ng-bind="u.email"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-
-<%--<script src="<c:url value='/static/js/app.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/todoController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/addressController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/tableController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/tabsController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/loginController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/userController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/userDetailController.js' />"></script>--%>
-<%--<script src="<c:url value='/static/js/controller/itemController.js' />"></script>--%>
-
-<%--</body>--%>
-<%--</html>--%>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="<c:url value='/static/js/app.js' />"></script>
+<script src="<c:url value='/static/js/service/user_service.js' />"></script>
+<script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+</body>
+</html>
