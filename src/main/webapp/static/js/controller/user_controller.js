@@ -1,17 +1,51 @@
 'use strict';
 
-angular.module('myApp').controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+angular.module('myApp').controller('UserController', ['$scope', '$window', 'UserService', function($scope, $window, UserService) {
     var self = this;
     self.user={id:null,username:'',address:'',email:''};
     self.users=[];
+    self.student_id = null;
+    self.loginId = null;
+    self.password = null;
 
     self.submit = submit;
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
+    self.logout = logout;
+    self.loginUser = loginUser;
+    self.loginMode = false;
 
+    //self.login_data = "user_id=2018021424&user_pass=1234&user_type=1234";
+    //fetchAllUsers();
+    //loginUser();
+    if ($window.sessionStorage.getItem("student_id") == null) {
+        self.loginMode = true;
+    } else {
+        self.student_id = $window.sessionStorage.getItem("student_id");
+    }
 
-    fetchAllUsers();
+    function loginUser() {
+        var login_data = "user_id=" + $scope.loginId + "&user_pass=" + $scope.password + "&user_type=";
+        UserService.loginUser(login_data)
+        .then(
+            function (d) {
+                if (d.student_id == null) {
+                    alert("아이디 또는 비밀번호가 틀립니다.");
+                    return;
+                }
+                $window.sessionStorage.setItem("student_id", d.student_id);
+                self.student_id = d.student_id;
+                self.loginMode = false;
+                alert("로그인 성공");
+            }
+        );
+    }
+
+    function logout() {
+        $window.sessionStorage.clear();
+        self.loginMode = true;
+    }
 
     function fetchAllUsers(){
         UserService.fetchAllUsers()

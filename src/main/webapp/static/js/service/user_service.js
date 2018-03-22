@@ -2,16 +2,35 @@
 
 angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $q){
 
-    var REST_SERVICE_URI = 'http://localhost:8080/Spring4MVCAngularJSExample/user/';
+    var REST_SERVICE_URI = 'http://localhost:8888/flowedu-api/user/';
 
     var factory = {
         fetchAllUsers: fetchAllUsers,
         createUser: createUser,
         updateUser:updateUser,
-        deleteUser:deleteUser
+        deleteUser:deleteUser,
+        loginUser:loginUser
     };
 
+    var config = {
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    }
+
     return factory;
+
+    function loginUser(login_data) {
+        var deferred = $q.defer();
+        console.log(login_data);
+        $http.post(REST_SERVICE_URI + "auth", login_data, config)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                }
+            );
+        return deferred.promise;
+    }
 
     function fetchAllUsers() {
         var deferred = $q.defer();
