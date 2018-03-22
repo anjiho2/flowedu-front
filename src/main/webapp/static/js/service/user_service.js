@@ -9,7 +9,8 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
         createUser: createUser,
         updateUser:updateUser,
         deleteUser:deleteUser,
-        loginUser:loginUser
+        loginUser:loginUser,
+        getUser:getUser
     };
 
     var config = {
@@ -22,8 +23,22 @@ angular.module('myApp').factory('UserService', ['$http', '$q', function($http, $
 
     function loginUser(login_data) {
         var deferred = $q.defer();
-        console.log(login_data);
         $http.post(REST_SERVICE_URI + "auth", login_data, config)
+            .then(
+                function (response) {
+                    deferred.resolve(response.data);
+                },
+                function (errResponse) {
+                    console.log("Error login Fail");
+                    deferred.reject(errResponse);
+                }
+            );
+        return deferred.promise;
+    }
+
+    function getUser(userId) {
+        var deferred = $q.defer();
+        $http.get(REST_SERVICE_URI + "info/" +  userId)
             .then(
                 function (response) {
                     deferred.resolve(response.data);

@@ -4,47 +4,71 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
     var self = this;
     self.user={id:null,username:'',address:'',email:''};
     self.users=[];
-    self.student_id = null;
     self.loginId = null;
     self.password = null;
+    self.studentId = null;
+    self.studentName = null;
+    self.userInfo = null;
+    self.loginMode = false;
 
+    //버튼함수 바인딩
     self.submit = submit;
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
     self.logout = logout;
     self.loginUser = loginUser;
-    self.loginMode = false;
+    self.getUser = getUser;
 
-    //self.login_data = "user_id=2018021424&user_pass=1234&user_type=1234";
+
     //fetchAllUsers();
     //loginUser();
-    if ($window.sessionStorage.getItem("student_id") == null) {
+
+    if ($window.sessionStorage.getItem("user_id") == null) {
         self.loginMode = true;
     } else {
-        self.student_id = $window.sessionStorage.getItem("student_id");
+        self.studentId = $window.sessionStorage.getItem("user_id");
+        self.studentName = $window.sessionStorage.getItem("user_name");
     }
 
+    //로그인
     function loginUser() {
         var login_data = "user_id=" + $scope.loginId + "&user_pass=" + $scope.password + "&user_type=";
         UserService.loginUser(login_data)
         .then(
-            function (d) {
-                if (d.student_id == null) {
+            function (data) {
+                if (data.student_id == null) {
                     alert("아이디 또는 비밀번호가 틀립니다.");
                     return;
                 }
-                $window.sessionStorage.setItem("student_id", d.student_id);
-                self.student_id = d.student_id;
+                $window.sessionStorage.setItem("user_id", data.student_id);
+                $window.sessionStorage.setItem("user_name", data.student_name);
                 self.loginMode = false;
                 alert("로그인 성공");
+            },
+            function (errResponse) {
+                console.log("Error login Fail");
             }
         );
     }
-
+    //로그아웃
     function logout() {
         $window.sessionStorage.clear();
         self.loginMode = true;
+    }
+    //사용자 정보 가져오기
+    function getUser() {
+        var userId = $window.sessionStorage.getItem("user_id");
+        UserService.getUser(userId)
+            .then(
+                function (data) {
+                    self.userInfo = data;
+                }
+            );
+    }
+
+    function updateUser() {
+
     }
 
     function fetchAllUsers(){
@@ -68,7 +92,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
             }
         );
     }
-
+    /*
     function updateUser(user, id){
         UserService.updateUser(user, id)
             .then(
@@ -78,7 +102,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
             }
         );
     }
-
+    */
     function deleteUser(id){
         UserService.deleteUser(id)
             .then(
