@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>AngularJS $http Example</title>
+    <title>플로우교육</title>
     <style>
         .username.ng-valid {
             background-color: lightgreen;
