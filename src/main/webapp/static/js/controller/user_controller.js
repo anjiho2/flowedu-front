@@ -60,27 +60,33 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', '$htt
         if (confirm("로그아웃하시겠습니까?")) {
             $window.sessionStorage.clear();
             self.loginMode = true;
+            $window.location.href = "/flowedu";
         }
     }
-
+    //마이페이지 정보 불러오기
     $scope.getUser = function () {
         var sutdentId = $window.sessionStorage.getItem("user_id");
+        if (sutdentId == null) {
+            alert("로그인상태가 아닙니다.");
+            $window.location.href = "/flowedu";
+            return;
+        }
         $http.get(REST_SERVICE_URI + "info/" + sutdentId).success(function (response) {
             $scope.userInfo = response;
+        }).error(function () {
+            alert("데이터를 불러오는데 에러가 발생했습니다.");
         });
     }
-    //사용자 정보 가져오기
-    /*
-    function getUser() {
-        var userId = $window.sessionStorage.getItem("user_id");
-        UserService.getUser(userId)
-            .then(
-                function (data) {
-                    self.userInfo = data;
-                }
-            );
+
+    $scope.updateUser = function () {
+        if ($scope.userInfo.school_type == "") {
+            alert("aa");
+            return;
+        }
+        //alert($scope.userInfo.student_name);
+        //alert($scope.userInfo.school_type);
     }
-    */
+
     function fetchAllUsers(){
         UserService.fetchAllUsers()
             .then(

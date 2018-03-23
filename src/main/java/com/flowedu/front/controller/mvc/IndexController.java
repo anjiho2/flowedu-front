@@ -17,15 +17,15 @@ public class IndexController {
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView loginLayout() {
         ModelAndView mvc = new ModelAndView();
-        mvc.setViewName("/login/layout");
+        mvc.setViewName("/user/login");
 
         return mvc;
     }
 
-    @RequestMapping(value = {"/todo"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/mypage"}, method = RequestMethod.GET)
     public ModelAndView getManagementPage() {
         ModelAndView mvc = new ModelAndView();
-        mvc.setViewName("/todo/layout");
+        mvc.setViewName("/user/mypage");
 
         return mvc;
     }
