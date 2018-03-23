@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <base href="/flowedu/">
     <title>플로우교육</title>
     <style>
         .username.ng-valid {
@@ -27,6 +28,11 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js"></script>
+    <script src="static/js/services.js"></script>
+    <script src="static/js/filters.js"></script>
+    <script src="static/js/directives.js"></script>
 </head>
 <body ng-app="myApp" class="ng-cloak">
 <div class="generic-container" ng-controller="UserController as ctrl">
@@ -34,19 +40,19 @@
         <div class="panel-heading"><span class="lead">로그인</span></div>
         <div class="formcontainer">
             <form name="myForm" class="form-horizontal">
-                <span ng-bind="ctrl.studentId"></span>
-                <span ng-bind="ctrl.studentName"></span>
+                <span ng-show="!ctrl.loginMode" ng-bind="ctrl.studentId"></span>
+                <span ng-show="!ctrl.loginMode" ng-bind="studentName"></span>
                 <input type="text" name="login_id" ng-show="ctrl.loginMode" ng-model="loginId">
                 <input type="text" name="login_pass" ng-show="ctrl.loginMode" ng-model="password">
                 <span ng-show="!ctrl.loginMode" ng-bind="ctrl.student_id"></span>
                 <button ng-show="ctrl.loginMode" ng-click="ctrl.loginUser()">로그인</button>
-                <button ng-show="!ctrl.loginMode" ng-click="ctrl.logout()">로그아웃</button>
+                <button ng-show="!ctrl.loginMode" ng-click="logout()">로그아웃</button>
                 <br>
-                <button ng-click="ctrl.getUser()">사용자정보 가져오기</button>
-                <span ng-bind="ctrl.userInfo.student_id"></span>
+                <button ng-click="getUser()">사용자정보 가져오기</button>
+                <span ng-bind="userInfo.student_id"></span>
                 <span ng-bind="ctrl.userInfo.student_name"></span>
                 <span ng-bind="ctrl.userInfo.school_name"></span>
-                <select ng-model="ctrl.userInfo.school_type">
+                <select ng-show="ctrl.userInfo != null" ng-model="ctrl.userInfo.school_type">
                     <option value="">선택하세요</option>
                     <option value="elem_list">초</option>
                     <option value="midd_list">중</option>
@@ -98,6 +104,8 @@
                         <%--<button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>--%>
                     <%--</div>--%>
                 <%--</div>--%>
+                <a href="login">Red</a>
+                <div ng-view></div>
             </form>
         </div>
     </div>
@@ -133,9 +141,8 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
 <script src="<c:url value='/static/js/app.js' />"></script>
-<script src="<c:url value='/static/js/service/user_service.js' />"></script>
 <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+<script src="<c:url value='/static/js/controller/lecture_controller.js' />"></script>
 </body>
 </html>

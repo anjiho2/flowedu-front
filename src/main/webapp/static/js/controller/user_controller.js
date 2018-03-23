@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').controller('UserController', ['$scope', '$window', 'UserService', function($scope, $window, UserService) {
+angular.module('myApp').controller('UserController', ['$scope', '$window', '$http', function($scope, $window, $http) {
     var self = this;
     self.user={id:null,username:'',address:'',email:''};
     self.users=[];
@@ -8,7 +8,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
     self.password = null;
     self.studentId = null;
     self.studentName = null;
-    self.userInfo = null;
+    //self.userInfo = null;
     self.loginMode = false;
 
     //버튼함수 바인딩
@@ -16,13 +16,20 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
     self.edit = edit;
     self.remove = remove;
     self.reset = reset;
-    self.logout = logout;
+    //self.logout = logout;
     self.loginUser = loginUser;
-    self.getUser = getUser;
+    //self.getUser = getUser;
 
 
     //fetchAllUsers();
     //loginUser();
+    var REST_SERVICE_URI = 'http://localhost:8888/flowedu-api/user/';
+
+    var config = {
+        headers : {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+        }
+    }
 
     if ($window.sessionStorage.getItem("user_id") == null) {
         self.loginMode = true;
@@ -34,29 +41,36 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
     //로그인
     function loginUser() {
         var login_data = "user_id=" + $scope.loginId + "&user_pass=" + $scope.password + "&user_type=";
-        UserService.loginUser(login_data)
-        .then(
-            function (data) {
-                if (data.student_id == null) {
-                    alert("아이디 또는 비밀번호가 틀립니다.");
-                    return;
-                }
-                $window.sessionStorage.setItem("user_id", data.student_id);
-                $window.sessionStorage.setItem("user_name", data.student_name);
-                self.loginMode = false;
-                alert("로그인 성공");
-            },
-            function (errResponse) {
-                console.log("Error login Fail");
+
+        $http.post(REST_SERVICE_URI + "auth", login_data, config).success(function (response) {
+            if (response == "") {
+                alert("아이디 또는 비밀번호가 틀립니다.");
+                return;
             }
-        );
+            self.loginMode = false;
+
+            $window.sessionStorage.setItem("user_id", response.student_id);
+            $scope.studentName = response.student_name;
+        }).error(function() {
+           alert("로그인 에러발생");
+        });
     }
     //로그아웃
-    function logout() {
-        $window.sessionStorage.clear();
-        self.loginMode = true;
+    $scope.logout = function () {
+        if (confirm("로그아웃하시겠습니까?")) {
+            $window.sessionStorage.clear();
+            self.loginMode = true;
+        }
+    }
+
+    $scope.getUser = function () {
+        var sutdentId = $window.sessionStorage.getItem("user_id");
+        $http.get(REST_SERVICE_URI + "info/" + sutdentId).success(function (response) {
+            $scope.userInfo = response;
+        });
     }
     //사용자 정보 가져오기
+    /*
     function getUser() {
         var userId = $window.sessionStorage.getItem("user_id");
         UserService.getUser(userId)
@@ -66,11 +80,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', 'User
                 }
             );
     }
-
-    function updateUser() {
-
-    }
-
+    */
     function fetchAllUsers(){
         UserService.fetchAllUsers()
             .then(

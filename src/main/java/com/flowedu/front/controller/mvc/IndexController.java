@@ -79,7 +79,7 @@ public class IndexController {
         return mvc;
     }
 
-    @RequestMapping(value = {"/test"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public ModelAndView testPage() {
         ModelAndView mvc = new ModelAndView();
 
