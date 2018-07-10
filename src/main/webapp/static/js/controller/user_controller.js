@@ -10,6 +10,8 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', '$htt
     self.studentName = null;
     //self.userInfo = null;
     self.loginMode = false;
+    self.imageHost = "http://169.56.71.251/student";
+    self.studentGrade = 0;
 
     //버튼함수 바인딩
     self.submit = submit;
@@ -37,7 +39,6 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', '$htt
         self.studentId = $window.sessionStorage.getItem("user_id");
         self.studentName = $window.sessionStorage.getItem("user_name");
     }
-
     //로그인
     function loginUser() {
         var login_data = "user_id=" + $scope.loginId + "&user_pass=" + $scope.password + "&user_type=";
@@ -50,6 +51,7 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', '$htt
             self.loginMode = false;
 
             $window.sessionStorage.setItem("user_id", response.student_id);
+            $window.sessionStorage.setItem("user_name", response.student_name);
             $scope.studentName = response.student_name;
         }).error(function() {
            alert("로그인 에러발생");
@@ -73,18 +75,52 @@ angular.module('myApp').controller('UserController', ['$scope', '$window', '$htt
         }
         $http.get(REST_SERVICE_URI + "info/" + sutdentId).success(function (response) {
             $scope.userInfo = response;
+            self.studentGrade = response.student_grade.toString();
         }).error(function () {
             alert("데이터를 불러오는데 에러가 발생했습니다.");
         });
     }
-
+    //학생정보 변경
     $scope.updateUser = function () {
-        if ($scope.userInfo.school_type == "") {
-            alert("aa");
-            return;
+        var sutdentId = self.studentId;
+        var data = {
+            studentName : $scope.userInfo.student_name,
+            studentGender : $scope.userInfo.student_gender,
+            studentBirthday : $scope.userInfo.student_birthday,
+            studentPhoneNumber: $scope.userInfo.student_phone_number,
+            schoolName : $scope.userInfo.school_name,
+            schoolType : $scope.userInfo.school_type,
+            studentGrade : self.studentGrade,
+            studentPhotoFile : null,
+            studentPhotoUrl : null,
+            motherName : $scope.userInfo.mother_name,
+            motherPhoneNumber : $scope.userInfo.mother_phone_number
+        };
+        if (confirm(lang.confirm_update)) {
+            $http.post(REST_SERVICE_URI + "modify/" + sutdentId, data).success(function (response) {
+                refresh_page();
+            }).error(function () {
+                alert(lang.is_error);
+            });
         }
-        //alert($scope.userInfo.student_name);
-        //alert($scope.userInfo.school_type);
+    }
+    //비밀번호 변경하기
+    $scope.updatePassword = function () {
+        var data = {
+            currentPass : $scope.currentPassword,
+            newPass : $scope.reNewPassword
+        }
+        $http.post(REST_SERVICE_URI + "/change_password/" + self.studentId, data).success(function (response) {
+            console.log(response);
+            if (response == false) {
+                alert(lang.current_password_error);
+                focus('focusMe');
+                return;
+            }
+            $window.location.href = "/flowedu/mypage";
+        }).error(function () {
+            alert(lang.is_error);
+        });
     }
 
     function fetchAllUsers(){

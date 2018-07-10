@@ -18,7 +18,6 @@ public class IndexController {
     public ModelAndView loginLayout() {
         ModelAndView mvc = new ModelAndView();
         mvc.setViewName("/user/login");
-
         return mvc;
     }
 
@@ -26,7 +25,20 @@ public class IndexController {
     public ModelAndView getManagementPage() {
         ModelAndView mvc = new ModelAndView();
         mvc.setViewName("/user/mypage");
+        return mvc;
+    }
 
+    @RequestMapping(value = {"/change_password"}, method = RequestMethod.GET)
+    public ModelAndView updatePassword() {
+        ModelAndView mvc = new ModelAndView();
+        mvc.setViewName("/user/change_password");
+        return mvc;
+    }
+
+    @RequestMapping(value = {"/payment_info"}, method = RequestMethod.GET)
+    public ModelAndView getPaymentPage() {
+        ModelAndView mvc = new ModelAndView();
+        mvc.setViewName("/payment/payment_info");
         return mvc;
     }
 
